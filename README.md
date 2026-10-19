@@ -14,3 +14,5 @@ La interfaz debe estar completamente en español y tener un diseño profesional,
 No tengo conocimientos previos de programación. Necesito que desarrolles una primera versión funcional, que pueda ejecutar en mi computadora Windows.
 No supongas que GIFT permite importar páginas de contenido. Separa correctamente las funciones de exportación y verifica los archivos generados.
 Explícame paso a paso cómo ejecutar, probar y utilizar la aplicación.
+
+Desarrolla la primera versión funcional de la aplicación descrita en README.md. Verifica su funcionamiento y prepara instrucciones sencillas para ejecutarla en Windows.
