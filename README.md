@@ -1,23 +1,37 @@
 # Generador de Lecciones Interactivas Moodle
 
-Primera versión funcional con interfaz en español. Permite crear páginas de contenido, preguntas de selección múltiple y verdadero/falso, organizar su orden, previsualizar, guardar y volver a editar.
+Versión 2 con interfaz en español: edición manual, preguntas y objetivos con IA a partir de transcripciones, vista previa, guardado JSON y exportación de preguntas GIFT con guía de configuración para Moodle 5.0.4+.
 
 ## Descargar y ejecutar en Windows
 
-1. En GitHub, abre `output/Generador-Lecciones-Moodle-v1.zip` y pulsa **Download raw file** (icono de descarga).
-2. Haz clic derecho sobre el ZIP descargado → **Extraer todo**.
-3. Abre la carpeta extraída y haz doble clic en **index.html**; elige Edge o Chrome.
-4. Lee [INSTRUCCIONES-WINDOWS.md](INSTRUCCIONES-WINDOWS.md) para crear, guardar y exportar tu lección.
+1. Abre [Generador-Lecciones-Moodle-v2.zip](output/Generador-Lecciones-Moodle-v2.zip) y pulsa **Download raw file** (icono de descarga).
+2. Haz clic derecho en el ZIP descargado → **Extraer todo**.
+3. Para edición manual, abre **index.html** con Edge o Chrome.
+4. Para IA, instala **Node.js LTS 22 o superior**, copia `config.example.json` como `config.local.json`, configura tu clave OpenAI y abre **INICIAR-IA.cmd**. Visita **http://127.0.0.1:8765** y mantén abierta la ventana del lanzador. No necesitas npm install.
 
-También puedes pulsar el botón verde **Code** → **Download ZIP** en el repositorio y extraerlo; los cuatro archivos de la aplicación están en la raíz.
+Lee [INSTRUCCIONES-WINDOWS.md](INSTRUCCIONES-WINDOWS.md) para la configuración paso a paso, costos, protección de claves, uso y pruebas en Moodle.
 
-No requiere instalar programas de desarrollo ni usar una terminal. Los videos necesitan conexión a Internet. Guarda una copia JSON al terminar.
+## Preguntas desde video: alcance real
 
-## Exportación y verificación
+- Pega una transcripción o sube MP4/WebM/MP3/M4A/WAV con audio, de hasta 24 MB, para transcribirlo mediante OpenAI API. No se analizan las imágenes.
+- El enlace de YouTube registra la fuente; esta versión no extrae sus subtítulos. Si no hay acceso, permite pegar la transcripción. Nunca genera preguntas a partir de la URL o del título.
+- Elige cantidad (1–20), dificultad y tipo de pregunta. La IA propone objetivos observables, respuesta correcta, retroalimentación y citas de evidencia; valida las citas contra el texto.
+- Edita los objetivos, incorpora los borradores y revisa cada pregunta antes de exportarla. Una cita real no garantiza una interpretación correcta: la aprobación docente es obligatoria.
+- OpenAI API es de pago y su facturación es independiente de ChatGPT. La clave se usa en el servidor local; `config.local.json` está excluido de Git y de la distribución. No lo compartas ni lo subas manualmente a GitHub. El modo manual sigue disponible sin clave.
 
-GIFT exporta **solo preguntas**. La guía HTML contiene las páginas de contenido y la secuencia que debes configurar manualmente en Moodle. La importación no se ha probado en una instancia real de Moodle 5.0.4+; revisa especialmente verdadero/falso, puntuaciones y saltos en un curso de prueba.
+## Un intento y exportación Moodle
 
-Se verificaron la lógica, las descargas, la edición y la vista del estudiante con Chromium en Linux. Consulta [VERIFICACION.md](VERIFICACION.md) para el alcance y las limitaciones.
+Cada pregunta admite una sola respuesta; tanto un acierto como un error muestran retroalimentación y habilitan Continuar. No hay reintento, retroceso ni repetición de toda la lección en la simulación. Editar inicia una nueva prueba docente.
+
+**GIFT contiene solo preguntas: no es una configuración completa de Lección.** Las páginas, objetivos, orden, intentos y saltos se configuran en Moodle siguiendo la guía HTML generada. Esta explica `maxattempts=1`, `review=0`, `modattempts=0`, `retake=0`, puntuación personalizada y saltos hacia la siguiente página tanto en correctas como incorrectas, con Fin de la lección al terminar.
+
+Se conserva el **JSON editable**, compatible con los proyectos de la versión 1. Ahora puede incluir transcripciones, evidencia y revisión. No contiene credenciales ni el video.
+
+## Verificación
+
+Las pruebas de lógica, API local y recorridos en Chromium pasan usando un proveedor de IA simulado, sin cargos. **No se hicieron llamadas reales a OpenAI ni pruebas en Windows o en una instancia Moodle real.** Consulta [VERIFICACION.md](VERIFICACION.md) para el detalle y las limitaciones.
+
+Pruebas sin dependencias npm: `node tests/core.test.js` y `node tests/ai.test.js`.
 
 ## Solicitud original
 

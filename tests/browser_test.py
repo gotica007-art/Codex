@@ -34,11 +34,15 @@ with sync_playwright() as p:
     page.locator('#preview').click();page.locator('#start').click();page.locator('#next').click()
     page.locator('[data-answer="1"]').click()
     assert 'incorrecta' in page.locator('#feedback').inner_text()
-    assert page.locator('#next').is_disabled()
-    page.locator('[data-answer="0"]').click();page.locator('#next').click()
+    assert page.locator('#next').is_enabled()
+    assert page.locator('[data-answer="0"]').is_disabled()
+    page.locator('#next').click()
     page.locator('[data-answer="0"]').click()
     assert '¡Exactamente!' in page.locator('#feedback').inner_text()
     page.locator('#next').click()
+    assert 'completada' in page.locator('#student-body').inner_text()
+    assert page.locator('#restart').count()==0
+    page.locator('#close').click();page.locator('#preview').click()
     assert 'completada' in page.locator('#student-body').inner_text()
     page.locator('#close').click()
     for id,name in [('gift','preguntas.gift'),('guide','guia-de-contenido.html'),('save','leccion-editable.json')]:

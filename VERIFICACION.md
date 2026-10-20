@@ -1,16 +1,25 @@
-# Verificación de la versión 1
+# Verificación — versión 2
 
-Comprobado el 19 de octubre de 2026 en Linux, Node 24 y Chromium automatizado con Playwright.
+Comprobaciones realizadas el 20 de octubre de 2026 en Linux con Node 24 y Chromium automatizado mediante Playwright.
 
-- Sintaxis de app.js y core.js: correcta.
-- Tres pruebas unitarias aprobadas: JSON válido e inválido; GIFT con cuatro alternativas, verdadero/falso, retroalimentación y escape de caracteres reservados; guía HTML segura, orden y enlaces de video.
-- Flujo de navegador aprobado: edición de datos generales y los tres tipos de elemento, cambio de orden, persistencia tras recargar, vista del estudiante, error con reintento, acierto con avance y finalización.
-- Descargas comprobadas desde el navegador: JSON editable, GIFT UTF-8 y guía HTML; se verificó su contenido y se volvió a abrir el JSON para editarlo.
-- Vista móvil de 390 px sin desbordamiento horizontal.
-- Sin errores JavaScript durante el recorrido.
+## Comprobado
 
-La automatización usó un servidor HTTP temporal local porque las políticas del Chromium de este entorno bloquean las URL file://. La aplicación utiliza scripts clásicos y rutas relativas, sin solicitudes fetch ni módulos, para permitir abrir index.html directamente en navegadores normales de Windows. No se ejecutó Windows ni se verificó allí el guardado local; se incluye la descarga JSON como respaldo independiente del almacenamiento del navegador.
+- Sintaxis de app.js, core.js, ai.js y server.js.
+- Tres pruebas de núcleo: JSON editable e inválido; exportación GIFT con selección múltiple y verdadero/falso, respuesta correcta, feedback y caracteres especiales; guía HTML escapada y enlaces YouTube.
+- Cinco pruebas nuevas de lógica e integración: validación de fuente, cantidad y dificultad; rechazo de citas inexistentes, preguntas inválidas y objetivos no evaluados; solicitudes Responses y transcripción con un proveedor simulado; bloqueo de exportación antes de revisar y guía de un intento; servidor HTTP con origen, host y token, y archivos privados inaccesibles.
+- Recorrido manual automatizado en navegador: crear y ordenar los tres tipos, guardar y reabrir JSON, persistencia, descargas GIFT y HTML, error con bloqueo de alternativas y avance, respuesta correcta y final sin repetir; cerrar y reabrir la vista previa conserva su estado.
+- Recorrido de IA con respuestas simuladas: enlace YouTube sin extracción, bloqueo sin transcripción, cantidad y dificultad enviadas, objetivos editables y preguntas incorporadas, revisión obligatoria, edición que invalida la revisión, evidencia y transcripción conservadas en JSON, exportación tras revisar, fallos de generación y transcripción con recuperación manual.
+- Interfaz a 390 px sin desbordamiento horizontal en ambos recorridos y sin errores JavaScript.
+- Archivo ZIP comprobado con testzip; incluye solo archivos enumerados, sin configuración privada, .git, claves, videos ni datos de trabajo.
 
-No se dispuso de una instancia Moodle 5.0.4+ para verificar la importación. Se verificaron la estructura GIFT y los archivos generados, no la aceptación del importador de Moodle. Las páginas de contenido se configuran manualmente con la guía. El usuario debe comprobar en un curso de prueba la conversión de verdadero/falso, las puntuaciones, retroalimentaciones y saltos antes del uso real.
+## Límites de esta verificación
 
-Los videos necesitan Internet; no se comprobó reproducción de videos externos.
+**No se realizaron llamadas reales de pago a OpenAI.** No hay credencial configurada en este entorno. Las pruebas verifican la lógica, el contrato de solicitudes/respuestas y la interfaz mediante respuestas simuladas; no demuestran calidad pedagógica real, reproducción de audio, extracción real de voz ni disponibilidad de modelos en una cuenta concreta. La prueba inicial real debe hacerse con un fragmento propio y revisar la transcripción y preguntas. El programa no presenta datos simulados como resultados reales ni tiene modo ficticio activado en producción.
+
+No se ejecutó Windows. Se incluyen instrucciones y un lanzador CMD para Node.js 22 o superior sin dependencias npm. El modo de archivo HTML se conserva para edición manual; las pruebas de navegador se realizaron sobre HTTP local porque el Chromium del entorno restringe file://.
+
+No se dispone de Moodle 5.0.4+ para restaurar/importar y ejecutar con estudiantes. Se revisaron los campos y saltos del código fuente de la versión v5.0.4. GIFT no conserva maxattempts, review, modattempts, retake ni saltos personalizados. La guía indica configurarlos y probarlos con una cuenta de estudiante, con puntuación personalizada 1/0 y avance tras cualquier respuesta. No se ofrece exportación MBZ en esta versión.
+
+No se extraen subtítulos de YouTube. La URL se guarda como fuente y se solicita una transcripción manual. El archivo subido se envía al servicio de transcripción: se usa su audio, sin analizar imágenes del video.
+
+Las citas se comprueban por coincidencia textual normalizando espacios. Esto evita referencias inexistentes, pero no demuestra que la pregunta, los distractores o la interpretación sean correctos. La revisión docente sigue siendo obligatoria.

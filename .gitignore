@@ -1,2 +1,6 @@
 work/
 __pycache__/
+config.local.json
+.env
+.env.*
+node_modules/
