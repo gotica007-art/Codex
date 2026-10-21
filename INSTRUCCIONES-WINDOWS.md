@@ -30,10 +30,10 @@ Fuentes oficiales: [tarifas](https://developers.openai.com/api/docs/pricing), [m
 3. En la carpeta extraída, copia `config.example.json` y cambia el nombre de la copia a **config.local.json**. En el Explorador, activa **Ver → Mostrar → Extensiones de nombre de archivo** para evitar llamarlo `config.local.json.txt`.
 4. Abre **config.local.json** con Bloc de notas. Entre las comillas vacías de `OPENAI_API_KEY`, pega tu clave. Conserva las comillas, comas y llaves. Guarda el archivo. No edites el archivo de ejemplo.
 5. Haz doble clic en **INICIAR-IA.cmd**. Mantén abierta la ventana que aparece.
-6. Abre **http://127.0.0.1:8765** en Edge o Chrome. La página debe indicar «Servicio local conectado». Si dice que falta la clave, revisa el archivo y cierra/vuelve a abrir INICIAR-IA.cmd.
+6. Abre **http://127.0.0.1:8765** en Edge o Chrome. La página debe indicar «Servicio local conectado». Si dice que falta la clave, guarda el archivo en la ruta mostrada en la página y pulsa **Comprobar configuración (sin costo)**. No hace falta reiniciar por cambios del archivo.
 7. Para cerrar el servidor, vuelve a su ventana y pulsa **Ctrl+C**. No se instala ningún servicio permanente.
 
-Los modelos se pueden cambiar en config.local.json si tu cuenta no tiene acceso a los predeterminados o si el proveedor los retira. El modelo de texto debe admitir Responses API y salidas estructuradas JSON Schema; el de audio debe admitir `/v1/audio/transcriptions` con respuesta JSON. Reinicia tras cambiar la configuración.
+Los modelos se pueden cambiar en config.local.json si tu cuenta no tiene acceso a los predeterminados o si el proveedor los retira. El modelo de texto debe admitir Responses API y salidas estructuradas JSON Schema; el de audio debe admitir `/v1/audio/transcriptions` con respuesta JSON. Los cambios del archivo se leen automáticamente al comprobar, generar o transcribir. Las variables de entorno sí requieren reiniciar el proceso.
 
 ### Protección de credenciales y contenido
 
@@ -149,3 +149,14 @@ Fuentes: [ajustes de Lección 5.0.4](https://github.com/moodle/moodle/blob/v5.0.
 ## Pruebas para personal técnico
 
 Sin dependencias npm: `node tests/core.test.js` y `node tests/ai.test.js`. Las pruebas de servidor usan un proveedor simulado, sin credenciales reales ni cargos. Las pruebas de interfaz en Linux requieren Python, Playwright y Chromium: `python tests/browser_test.py` y `python tests/browser_ai_test.py`. No son necesarios para utilizar el programa.
+
+## Corrección v2.0.1: clave escrita pero no detectada
+
+1. Guarda tu JSON editable antes de cambiar de versión.
+2. Detén la ventana antigua de INICIAR-IA.cmd con Ctrl+C.
+3. Extrae la nueva versión en otra carpeta y copia a ella tu config.local.json privado (no lo subas a GitHub). Si la clave se expuso en una captura, revócala y usa una nueva.
+4. Inicia INICIAR-IA.cmd desde la carpeta nueva, abre http://127.0.0.1:8765 y pulsa Ctrl+F5.
+5. Pulsa **Comprobar configuración (sin costo)** y comprueba la ruta mostrada: el archivo debe llamarse exactamente config.local.json, no config.example.json ni config.local.json.txt.
+6. La página mostrará «Clave detectada»; esto confirma lectura local, no validez ni saldo de la cuenta OpenAI. La validación del proveedor ocurre cuando solicitas generar o transcribir.
+
+Esta corrección acepta JSON UTF-8 con BOM de algunos editores Windows, elimina espacios exteriores de los valores y explica los errores de formato sin mostrar la clave. Relee el archivo sin reiniciar el servidor.

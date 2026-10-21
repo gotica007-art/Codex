@@ -1,10 +1,10 @@
 # Generador de Lecciones Interactivas Moodle
 
-Versión 2 con interfaz en español: edición manual, preguntas y objetivos con IA a partir de transcripciones, vista previa, guardado JSON y exportación de preguntas GIFT con guía de configuración para Moodle 5.0.4+.
+Versión 2.0.1 con interfaz en español: edición manual, preguntas y objetivos con IA a partir de transcripciones, vista previa, guardado JSON y exportación de preguntas GIFT con guía de configuración para Moodle 5.0.4+.
 
 ## Descargar y ejecutar en Windows
 
-1. Abre [Generador-Lecciones-Moodle-v2.zip](output/Generador-Lecciones-Moodle-v2.zip) y pulsa **Download raw file** (icono de descarga).
+1. Abre [Generador-Lecciones-Moodle-v2.0.1.zip](output/Generador-Lecciones-Moodle-v2.0.1.zip) y pulsa **Download raw file** (icono de descarga).
 2. Haz clic derecho en el ZIP descargado → **Extraer todo**.
 3. Para edición manual, abre **index.html** con Edge o Chrome.
 4. Para IA, instala **Node.js LTS 22 o superior**, copia `config.example.json` como `config.local.json`, configura tu clave OpenAI y abre **INICIAR-IA.cmd**. Visita **http://127.0.0.1:8765** y mantén abierta la ventana del lanzador. No necesitas npm install.
@@ -51,3 +51,5 @@ La interfaz debe estar completamente en español y tener un diseño profesional,
 No tengo conocimientos previos de programación. Necesito que desarrolles una primera versión funcional, que pueda ejecutar en mi computadora Windows.
 No supongas que GIFT permite importar páginas de contenido. Separa correctamente las funciones de exportación y verifica los archivos generados.
 Explícame paso a paso cómo ejecutar, probar y utilizar la aplicación.
+
+Corrección 2.0.1: lectura de configuración sin reiniciar, botón de comprobación sin costo, ruta del archivo visible y diagnóstico de extensiones ocultas/JSON inválido.

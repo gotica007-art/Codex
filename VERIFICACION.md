@@ -23,3 +23,7 @@ No se dispone de Moodle 5.0.4+ para restaurar/importar y ejecutar con estudiante
 No se extraen subtítulos de YouTube. La URL se guarda como fuente y se solicita una transcripción manual. El archivo subido se envía al servicio de transcripción: se usa su audio, sin analizar imágenes del video.
 
 Las citas se comprueban por coincidencia textual normalizando espacios. Esto evita referencias inexistentes, pero no demuestra que la pregunta, los distractores o la interpretación sean correctos. La revisión docente sigue siendo obligatoria.
+
+## Corrección 2.0.1
+
+Se añadió una prueba con archivos temporales sin claves reales: el mismo servidor detecta la clave añadida después del arranque, acepta BOM y espacios, identifica extensión .json.txt y JSON inválido sin revelar valores privados en sus respuestas. No se valida una clave real con OpenAI.
